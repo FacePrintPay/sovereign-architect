@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-import sys
+import sys, json, datetime
 
-# Placeholder for future queue/worker system
-print("Enqueue system coming soon…")
-if len(sys.argv) > 1:
-    print("Requested task:", " ".join(sys.argv[1:]))
+payload = {
+    "status": "todo",
+    "message": "Queue/worker system not implemented yet.",
+    "args": sys.argv[1:],
+    "timestamp": datetime.datetime.now().isoformat()
+}
+
+print(json.dumps(payload, indent=2))
