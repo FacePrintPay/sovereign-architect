@@ -48,3 +48,5 @@ jq '.status, (.steps[] | {step_id, title, status})' ~/sovereign-architect/plans/
 # View latest output
 ls -lt ~/sovereign-architect/storage/outputs/
 ```
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=README.md

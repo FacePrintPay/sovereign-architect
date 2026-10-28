@@ -32,3 +32,5 @@ find "$HOME" -type f \( -name "*.sh" -o -name "*.py" -o -name "*.js" \) \
 done
 
 echo "✅ Artifact aggregation complete!"
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=aggregate_artifacts.sh

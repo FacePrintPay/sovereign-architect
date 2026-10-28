@@ -117,3 +117,5 @@ scripts/v2_evidence/stamp_all.sh
 scripts/v2_evidence/generate_legal_manifest.sh
 
 echo "✅ v2.0 Upgrade complete! Run './repodepo.sh menu' for the new interface."
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=install_v2_evidence_locked.sh

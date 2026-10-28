@@ -27,3 +27,5 @@ def rotate(req: RotateReq):
         "new_key": "ak_" + secrets.token_urlsafe(32),
         "rotated_at": datetime.utcnow().isoformat()
     }
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=keys_api.py

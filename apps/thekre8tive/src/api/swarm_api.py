@@ -40,3 +40,5 @@ def task(t: TaskReq):
         "created_at": datetime.utcnow().isoformat()
     }, indent=2))
     return {"task_id": tid, "status": "queued"}
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=swarm_api.py

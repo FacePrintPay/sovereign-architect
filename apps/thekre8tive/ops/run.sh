@@ -19,3 +19,5 @@ echo "Running:"
 echo "  Web   http://127.0.0.1:8765/index.html"
 echo "  Keys  http://127.0.0.1:8000/health"
 echo "  Swarm http://127.0.0.1:8001/swarm/status"
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=run.sh

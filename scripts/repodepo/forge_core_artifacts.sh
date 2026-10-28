@@ -296,3 +296,5 @@ echo "[✓] Heads:"
 sed -n '1,18p' "$YES"
 echo "-----"
 sed -n '1,18p' "$STATE"
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=forge_core_artifacts.sh

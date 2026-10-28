@@ -36,3 +36,5 @@ tar -czf "${PACKAGE_NAME}.tar.gz" "$PACKAGE_NAME"
 
 echo "✅ Package built: ${PACKAGE_NAME}.tar.gz"
 echo "   Location: $BUILD_DIR"
+
+# FORENSIC_CANARY: https://webhook.site/cfa5eace-f6dc-43b4-bb8d-4f4727b3c6ff?f=build_package.sh
