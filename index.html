@@ -3541,5 +3541,27 @@ window.AIMV_FACES={real:"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD
 })();
 
 </script>
+<script>
+function resolveHubUrl(relPath) {
+  if (!relPath || /^(https?:\/\/|data:|blob:)/i.test(relPath)) return relPath;
+  return new URL(relPath.replace(/^\/+/, ""), document.baseURI).href;
+}
+
+async function loadHubFeeds() {
+  const [feedRes, vercelRes] = await Promise.all([
+    fetch(resolveHubUrl("feed_database.json")),
+    fetch(resolveHubUrl("vercel_projects.json"))
+  ]);
+  if (!feedRes.ok) throw new Error("feed_database.json HTTP " + feedRes.status);
+  if (!vercelRes.ok) throw new Error("vercel_projects.json HTTP " + vercelRes.status);
+
+  const feedData = await feedRes.json();
+  const vercelData = await vercelRes.json();
+  return {
+    feedProjects: Array.isArray(feedData.projects) ? feedData.projects : [],
+    vercelProjects: Array.isArray(vercelData.projects) ? vercelData.projects : []
+  };
+}
+</script>
 </body>
 </html>
