@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-11-14",
+  "license_notice": "Underlying court rules are U.S. government public domain edicts.",
+  "jurisdictions": [
+    {
+      "state_code": "NC",
+      "state_name": "North Carolina",
+      "rules": [
+        {
+          "id": "nc-civil-procedure",
+          "title": "North Carolina Rules of Civil Procedure",
+          "category": "Civil",
+          "file_path": "/rules/nc/nc-civil-procedure.pdf",
+          "source_url": "https://nccourts.gov"
+        },
+        {
+          "id": "nc-appellate-procedure",
+          "title": "North Carolina Rules of Appellate Procedure",
+          "category": "Appellate",
+          "file_path": "/rules/nc/nc-appellate-procedure.pdf",
+          "source_url": "https://nccourts.gov"
+        }
+      ]
+    },
+    {
+      "state_code": "US",
+      "state_name": "Federal",
+      "rules": [
+        {
+          "id": "fed-civil-procedure",
+          "title": "Federal Rules of Civil Procedure",
+          "category": "Civil",
+          "file_path": "/rules/federal/federal-rules-of-civil-procedure.pdf",
+          "source_url": "https://uscourts.gov"
+        }
+      ]
+    }
+  ]
+}
