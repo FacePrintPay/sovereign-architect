@@ -3563,5 +3563,92 @@ async function loadHubFeeds() {
   };
 }
 </script>
+<section id="hub-feeds-mount" data-hub-feeds="true" style="margin:1.5rem 0;">
+  <div id="vercel-projects-status"></div>
+  <div id="vercel-projects-grid"></div>
+  <div id="feed-projects-status"></div>
+  <div id="feed-projects-grid"></div>
+</section>
+<script>
+function renderHubCards(container, items, label) {
+  if (!container) return;
+  container.textContent = "";
+  const frag = document.createDocumentFragment();
+
+  items.forEach((proj) => {
+    const card = document.createElement("article");
+    card.className = "hub-project-card";
+
+    const title = document.createElement("h3");
+    title.textContent = proj && proj.name ? String(proj.name) : "Untitled Project";
+    card.appendChild(title);
+
+    if (proj && proj.description) {
+      const desc = document.createElement("p");
+      desc.textContent = String(proj.description);
+      card.appendChild(desc);
+    }
+
+    const meta = document.createElement("div");
+    meta.className = "hub-project-meta";
+    const stars = Number(proj && proj.stars ? proj.stars : 0);
+    const sourceType = proj && proj.source_type ? String(proj.source_type) : label;
+    meta.textContent = `${sourceType} | ★ ${stars}`;
+    card.appendChild(meta);
+
+    const linkUrl = (proj && (proj.github_url || proj.deploy_url)) || "";
+    if (linkUrl && /^https?:\/\//i.test(String(linkUrl))) {
+      const link = document.createElement("a");
+      link.href = String(linkUrl);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Open Repository";
+      card.appendChild(link);
+    }
+
+    frag.appendChild(card);
+  });
+
+  container.appendChild(frag);
+}
+
+async function renderHubFeedsUI() {
+  if (typeof loadHubFeeds !== "function") return;
+
+  const vercelGrid =
+    document.getElementById("vercel-projects-grid") ||
+    document.querySelector("[data-vercel-projects]");
+  const feedGrid =
+    document.getElementById("feed-projects-grid") ||
+    document.querySelector("[data-feed-projects]");
+  const vercelStatus = document.getElementById("vercel-projects-status");
+  const feedStatus = document.getElementById("feed-projects-status");
+
+  try {
+    const { feedProjects, vercelProjects } = await loadHubFeeds();
+
+    if (vercelStatus) {
+      vercelStatus.textContent = `Normalized Vercel / Hub Projects (${vercelProjects.length})`;
+    }
+    if (feedStatus) {
+      feedStatus.textContent = `Feed Database Projects (${feedProjects.length})`;
+    }
+
+    renderHubCards(vercelGrid, vercelProjects, "vercel");
+    renderHubCards(feedGrid, feedProjects, "feed");
+  } catch (err) {
+    const msg = err && err.message ? err.message : String(err);
+    if (vercelStatus) vercelStatus.textContent = `Feed load error: ${msg}`;
+    if (feedStatus) feedStatus.textContent = `Feed load error: ${msg}`;
+    console.error("renderHubFeedsUI failed:", err);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", renderHubFeedsUI, { once: true });
+} else {
+  renderHubFeedsUI();
+}
+</script>
 </body>
 </html>
