@@ -2,7 +2,8 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -11,15 +12,15 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,33 +28,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build site
-        shell: bash
-        run: |
-          mkdir -p site
-          if [ -d docs ]; then
-            cp -r docs/* site/ 2>/dev/null || true
-          fi
-          if [ ! -f site/index.html ]; then
-            cat > site/index.html <<'EOF2'
-<!doctype html>
-<html lang="en">
-  <head><meta charset="utf-8"><title>Repository</title></head>
-  <body><h1>Repository</h1><p>GitHub Pages enabled.</p></body>
-</html>
-EOF2
-          fi
-          for f in index.html 404.html .nojekyll feed_database.json vercel_projects.json; do
-            if [ -f "$f" ] && [ ! -e "site/$f" ]; then
-              cp "$f" "site/$f"
-            fi
-          done
-
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: ./site
+          path: "."
 
-      - name: Deploy to Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
